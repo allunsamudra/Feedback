@@ -15,6 +15,6 @@ MonthlyIncome = st.number_input("MonthlyIncome", min_value=0.0, max_value=4.0)
 EducationalQualifications = st.number_input("EducationalQualifications", min_value=0.0, max_value=3)
 
 if st.button("Predict"):
-    features = np.array([[(Age, Gender, Occupation, MonthlyIncome, EducationalQualifications]])
+    features = np.array([(Age, Gender, Occupation, MonthlyIncome, EducationalQualifications])
     prediction = model.predict(features)
     st.write(f"The predicted feedback is: {prediction[0]}")
