@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 
 # membaca model
-model = pickle.load(open('model.sav', 'rb'))
+fb_model = pickle.load(open('model.sav', 'rb'))
 
 #judul web
 st.title('Prediksi Feedback')
@@ -30,7 +30,7 @@ feedback_pred = ''
 
 # membuat tombol untuk prediksi
 if st.button('Test Prediksi Feedback'):
-    feedback_prediction = model.predict([[Age, Gender, Occupation, MonthlyIncome, EducationalQualifications]])
+    feedback_prediction = fb_model.predict([[Age, Gender, Occupation, MonthlyIncome, EducationalQualifications]])
 
     if(feedback_prediction(0) == 0):
         feedback_pred = "Negative"
