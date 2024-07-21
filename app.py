@@ -2,25 +2,19 @@ import streamlit as st
 import joblib
 import numpy as np
 
-def predict_feedback(Age, Gender, Occupation, MonthlyIncome, EducationalQualifications):
-    model = joblib.load('onlinefood.pkl')
-    prediction = model.predict([[Age, Gender, Occupation, MonthlyIncome, EducationalQualifications]])
-    return prediction[0]
+# Muat model yang sudah dilatih
+model = joblib.load('onlinefood.pkl')
 
-with gr.Blocks(theme=gr.themes.Monochrome()) as interface:
-    gr.Interface(
-    fn=predict_feedback,
-    inputs=[
-        gr.Textbox(label="Age"),
-        gr.Textbox(label="Gender [Female(0), Male(1)]"),
-        gr.Textbox(label="Occupation"),
-        gr.Textbox(label="MonthlyIncome"),
-        gr.Textbox(label="EducationalQualifications")
-    ],
-    outputs=gr.Textbox(label="Feedback"),
-    title="Feedback Predictor",
-    description="Enter Your Age, Female(0), Male(1)"
-)
-    
-if __name__ == "__main__":
-    interface.launch
+st.title("Iris Species Classifier")
+st.write("Masukkan fitur-fitur dari bunga iris dan model akan memprediksi spesiesnya.")
+
+Age = st.number_input("Age", min_value=0.0, max_value=100.0)
+Gender = st.number_input("Gender", min_value=0.0, max_value=1.0)
+Occupation = st.number_input("Occupation", min_value=0.0, max_value=4.0)
+MonthlyIncome = st.number_input("MonthlyIncome", min_value=0.0, max_value=4.0)
+EducationalQualifications = st.number_input("EducationalQualifications", min_value=0.0, max_value=3)
+
+if st.button("Predict"):
+    features = np.array([[(Age, Gender, Occupation, MonthlyIncome, EducationalQualifications]])
+    prediction = model.predict(features)
+    st.write(f"The predicted feedback is: {prediction[0]}")
