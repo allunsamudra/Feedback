@@ -1,6 +1,6 @@
 import streamlit as st
-import gradio as gr
 import joblib
+import numpy as np
 
 def predict_feedback(Age, Gender, Occupation, MonthlyIncome, EducationalQualifications):
     model = joblib.load('onlinefood.pkl')
